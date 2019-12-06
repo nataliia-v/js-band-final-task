@@ -1,17 +1,25 @@
-// import { startLoginUser, stopLoginUser, loginUserFailed, loginUserSucces } from './actions';
+import {
+  startLoginUser,
+  stopLoginUser,
+  loginUserFailed,
+  loginUserSucces
+} from './actions';
+import booksStore from '../../components/services/booksStoreService';
 
-export const signInUser = () => {
-  // export const signInUser = userData => {
-  // return async dispatch => {
-  //   dispatch(startLoginUser());
-  //
-  //   try {
-  //     const data = await booksService.authUser(userData.username);
-  //     dispatch(loginUserSucces(data));
-  //   } catch (error) {
-  //     dispatch(loginUserFailed(error));
-  //   } finally {
-  //     dispatch(stopLoginUser());
-  //   }
-  // };
+export const signInUser = userData => {
+  return async dispatch => {
+    dispatch(startLoginUser());
+
+    try {
+      const data = await booksStore.authUser(userData.username);
+      localStorage.setItem('token', data.token);
+      dispatch(loginUserSucces(data));
+      console.log(localStorage);
+      console.log(data);
+    } catch (error) {
+      dispatch(loginUserFailed(error));
+    } finally {
+      dispatch(stopLoginUser());
+    }
+  };
 };
