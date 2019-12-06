@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { userPostFetch } from 'state/auth/actions';
+import { signInUser } from 'state/auth/thunks';
 import FormField from '../../../../components/Forms/FormField/FormField';
 import Input from '../../../../components/Forms/Input/Input';
 
@@ -32,6 +32,7 @@ class SignInForm extends Component {
     const { formValues } = this.state;
     this.props.userPostFetch(formValues);
   };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -59,7 +60,7 @@ class SignInForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  userPostFetch: formValues => dispatch(userPostFetch(formValues))
+  userPostFetch: formValues => dispatch(signInUser(formValues))
 });
 
 export default connect(null, mapDispatchToProps)(SignInForm);
