@@ -19,11 +19,10 @@ class SignInForm extends Component {
   }
 
   handleChange = event => {
+    const { name, value } = event.currentTarget;
+
     this.setState(({ formValues }) => ({
-      formValues: {
-        ...formValues,
-        username: event.target.value
-      }
+      formValues: { ...formValues, [name]: value }
     }));
   };
 
@@ -31,10 +30,8 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const { formValues } = this.state;
-
     this.props.userPostFetch(formValues);
   };
-
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
