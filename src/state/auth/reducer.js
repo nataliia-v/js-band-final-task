@@ -16,17 +16,21 @@ const reducer = (state = initialState, action) => {
     case START_LOGIN_USER:
       return {
         ...state,
-        isAuthorized: true
+        isAuthorized: false
       };
     case STOP_LOGIN_USER:
       return {
         ...state,
-        isAuthorized: false
+        isAuthorized: true
       };
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
-        userData: action.payload
+        userData: {
+          username: action.payload.username,
+          avatar: action.payload.avatar
+        },
+        isAuthorized: true
       };
     case LOGIN_USER_FAILED:
       return {

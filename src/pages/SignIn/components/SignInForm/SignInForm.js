@@ -30,7 +30,8 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const { formValues } = this.state;
-    this.props.userPostFetch(formValues);
+    const { dispatch } = this.props;
+    dispatch(signInUser(formValues));
   };
 
   render() {
@@ -59,8 +60,4 @@ class SignInForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  userPostFetch: formValues => dispatch(signInUser(formValues))
-});
-
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default connect()(SignInForm);
