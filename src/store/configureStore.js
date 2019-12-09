@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import { unauthorizedMiddleware } from 'store/middlewares';
 
 import rootReducer from './rootReducer';
 
@@ -9,6 +10,6 @@ const composeEnhancers = devtools || compose;
 export default () => {
   return createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(thunkMiddleware))
+    composeEnhancers(applyMiddleware(thunkMiddleware, unauthorizedMiddleware))
   );
 };

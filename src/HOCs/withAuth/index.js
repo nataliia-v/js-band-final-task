@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { getIsAuthorizedUser } from 'state/auth/selectors';
+import { getIsAuthorizedUser } from 'store/auth/selectors';
 
 const withAuth = ({ isPublic }) => WrappedComponent => {
   const WithAuth = ({ isAuthorized, ...props }) => {

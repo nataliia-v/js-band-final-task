@@ -3,7 +3,8 @@ import {
   STOP_LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
-  AUTH_SUCCESS
+  AUTH_SUCCESS,
+  AUTH_FAIL
 } from './types';
 
 export const startLoginUser = () => ({
@@ -22,4 +23,7 @@ export const loginUserFailed = error => ({
 });
 export const authSuccess = () => ({
   type: AUTH_SUCCESS
+});
+export const authFail = () => ({
+  type: AUTH_FAIL
 });

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { signInUser } from 'state/auth/thunks';
-import { getIsLoadingUserLogin } from 'state/auth/selectors';
+import { signInUser } from 'store/auth/thunks';
+import { getIsLoadingUserLogin } from 'store/auth/selectors';
 
 import SignInForm from './components/SignInForm/SignInForm';
 
