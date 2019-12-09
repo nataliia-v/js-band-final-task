@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect, Route, Router, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { auth } from 'store/auth/thunks';
 import { getIsInitializedLayout } from 'store/layout/selectors';
@@ -10,8 +10,8 @@ import SignIn from 'pages/PublicRoutes/SignIn/SignIn';
 import NotFound from 'pages/PublicRoutes/NotFound/NotFound';
 import Books from 'pages/PrivateRoutes/Books/Books';
 import BookDetails from 'pages/PrivateRoutes/BookDetails/BookDetails';
+
 import withAuth from 'HOCs/withAuth';
-import history from 'utils/router/history';
 
 class Routes extends Component {
   componentDidMount() {
@@ -24,7 +24,7 @@ class Routes extends Component {
     const { isInitializedLayout } = this.props;
 
     return (
-      <Router history={history}>
+      <HashRouter>
         {isInitializedLayout && (
           <Switch>
             <Route
@@ -47,7 +47,7 @@ class Routes extends Component {
             </Route>
           </Switch>
         )}
-      </Router>
+      </HashRouter>
     );
   }
 }

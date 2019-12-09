@@ -6,18 +6,16 @@ import { getIsAuthorizedUser } from 'store/auth/selectors';
 
 const withAuth = ({ isPublic }) => WrappedComponent => {
   const WithAuth = ({ isAuthorized, ...props }) => {
-    if (!isAuthorized && isPublic) {
-      return <WrappedComponent {...props} />;
+    switch (true) {
+      case !isAuthorized && isPublic:
+        return <WrappedComponent {...props} />;
+      case isAuthorized && isPublic:
+        return <Redirect from="*" to="/" />;
+      case isAuthorized:
+        return <WrappedComponent {...props} />;
+      default:
+        return <Redirect from="*" to="/signin" />;
     }
-
-    if (isAuthorized && isPublic) {
-      return <Redirect from="*" to="/" />;
-    }
-
-    if (isAuthorized) {
-      return <WrappedComponent {...props} />;
-    }
-    return <Redirect from="*" to="/signin" />;
   };
 
   const mapStateToProps = state => ({
