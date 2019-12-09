@@ -2,12 +2,14 @@ import {
   START_LOGIN_USER,
   STOP_LOGIN_USER,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILED
+  LOGIN_USER_FAILED,
+  AUTH_SUCCESS
 } from './types';
 
 const initialState = {
-  userData: {},
+  isLoading: false,
   isAuthorized: false,
+  userData: {},
   error: null
 };
 
@@ -16,12 +18,12 @@ const reducer = (state = initialState, action) => {
     case START_LOGIN_USER:
       return {
         ...state,
-        isAuthorized: false
+        isLoading: true
       };
     case STOP_LOGIN_USER:
       return {
         ...state,
-        isAuthorized: true
+        isLoading: false
       };
     case LOGIN_USER_SUCCESS:
       return {
@@ -36,6 +38,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        isAuthorized: true
       };
     default:
       return state;

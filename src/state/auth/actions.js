@@ -2,7 +2,8 @@ import {
   START_LOGIN_USER,
   STOP_LOGIN_USER,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILED
+  LOGIN_USER_FAILED,
+  AUTH_SUCCESS
 } from './types';
 
 export const startLoginUser = () => ({
@@ -11,11 +12,14 @@ export const startLoginUser = () => ({
 export const stopLoginUser = () => ({
   type: STOP_LOGIN_USER
 });
-export const loginUserSucces = userData => ({
+export const loginUserSuccess = userData => ({
   type: LOGIN_USER_SUCCESS,
   payload: userData
 });
 export const loginUserFailed = error => ({
   type: LOGIN_USER_FAILED,
   payload: error
+});
+export const authSuccess = () => ({
+  type: AUTH_SUCCESS
 });

@@ -7,6 +7,11 @@ export const getIsAuthorizedUser = createSelector(
   authState => authState.isAuthorized
 );
 
+export const getIsLoadingUserLogin = createSelector(
+  getUserModuleState,
+  authState => authState.isLoading
+);
+
 export const getAuthorizedError = createSelector(
   getUserModuleState,
   authState => authState.error
