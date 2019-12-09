@@ -5,9 +5,8 @@ import { bindActionCreators } from 'redux';
 import { signInUser } from 'store/auth/thunks';
 import { getIsLoadingUserLogin } from 'store/auth/selectors';
 
-import SignInForm from './components/SignInForm/SignInForm';
-
 import { ReactComponent as UserAvatar } from 'images/user.svg';
+import SignInForm from './components/SignInForm/SignInForm';
 
 import styles from './SignIn.module.scss';
 
