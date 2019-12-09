@@ -6,7 +6,9 @@ function Input({
   value,
   placeholder,
   onChange,
-  required = false
+  required = false,
+  minLength = 0,
+  maxLength
 }) {
   return (
     <input
@@ -17,6 +19,8 @@ function Input({
       placeholder={placeholder}
       onChange={onChange}
       required={required}
+      minLength={minLength}
+      maxLength={maxLength}
     />
   );
 }

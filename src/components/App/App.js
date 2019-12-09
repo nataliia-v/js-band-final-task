@@ -1,8 +1,7 @@
 import React from 'react';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import Header from '../Header/Header';
-import SignIn from '../../pages/SignIn/SignIn';
+import Header from 'components/Header/Header';
+import Routes from 'pages/Routes';
 
 const internName = 'Nataliia Verbenska';
 
@@ -10,12 +9,7 @@ function App() {
   return (
     <div>
       <Header internName={internName} />
-      <HashRouter>
-        <Switch>
-          <Route path="/signin" component={SignIn} />
-          <Redirect from="*" to="/signin" exact />
-        </Switch>
-      </HashRouter>
+      <Routes />
     </div>
   );
 }

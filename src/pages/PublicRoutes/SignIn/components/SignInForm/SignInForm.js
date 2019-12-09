@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { signInUser } from 'state/auth/thunks';
-import FormField from '../../../../components/Forms/FormField/FormField';
-import Input from '../../../../components/Forms/Input/Input';
+import FormField from 'components/Forms/FormField/FormField';
+import Input from 'components/Forms/Input/Input';
 
 import styles from './SignInForm.module.scss';
 
@@ -30,11 +28,15 @@ class SignInForm extends Component {
     event.preventDefault();
 
     const { formValues } = this.state;
-    const { dispatch } = this.props;
-    dispatch(signInUser(formValues));
+    const { onSubmit } = this.props;
+
+    onSubmit(formValues);
   };
 
   render() {
+    const { isLoadingUserLogin } = this.props;
+    const { formValues } = this.state;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <FormField
@@ -42,9 +44,11 @@ class SignInForm extends Component {
           control={
             <Input
               name="username"
-              value={this.state.username}
+              value={formValues.username}
               placeholder="type Username"
               onChange={this.handleChange}
+              minLength={4}
+              maxLength={16}
               required
             />
           }
@@ -53,11 +57,15 @@ class SignInForm extends Component {
           type="submit"
           className={classNames(styles.btn, 'btn btn-outline-primary')}
         >
-          Sign-In
+          {isLoadingUserLogin ? (
+            <div className="spinner-border text-primary" />
+          ) : (
+            'Sign-In'
+          )}
         </button>
       </form>
     );
   }
 }
 
-export default connect()(SignInForm);
+export default SignInForm;
