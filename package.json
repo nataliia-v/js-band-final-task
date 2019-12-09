@@ -2,7 +2,7 @@
   "name": "js-band-final-task",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/nataliia-v/js-band-final-task",
+  "homepage": "https://nataliia-v.github.io/js-band-final-task",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
