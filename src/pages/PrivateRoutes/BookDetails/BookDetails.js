@@ -8,27 +8,23 @@ import styles from './BookDetails.module.scss';
 
 class BookDetails extends Component {
   componentDidMount = () => {
-    let {
+    const {
       match: {
         params: { id }
       }
-    } = this.props; //id
+    } = this.props; // id
     const { actions } = this.props;
 
     actions.fetchBook({ id });
   };
+
   render() {
-    let {
-      match: {
-        params: { id }
-      }
-    } = this.props; //id
     const { book } = this.props;
 
     return (
       <div>
         <div className={styles.book}>
-          <img src={book.cover} alt="" />
+          <img src={book.cover} alt="book" />
           <div className={styles.bookInfo}>
             <p>Book name: {book.title}</p>
             <p>Author: {book.author}</p>
@@ -48,7 +44,7 @@ class BookDetails extends Component {
               <span>Total price</span>
               <span>total price</span>
             </div>
-            <button>Add to cart</button>
+            <button type="button">Add to cart</button>
           </div>
         </div>
         <p>{book.description}</p>
