@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import { auth } from 'state/auth/thunks';
-import { getIsInitializedLayout } from 'state/layout/selectors';
+import { auth } from 'store/auth/thunks';
+import { getIsInitializedLayout } from 'store/layout/selectors';
 
 import SignIn from 'pages/PublicRoutes/SignIn/SignIn';
 import NotFound from 'pages/PublicRoutes/NotFound/NotFound';
@@ -22,7 +22,6 @@ class Routes extends Component {
 
   render() {
     const { isInitializedLayout } = this.props;
-    console.log('isInitializedLayout', isInitializedLayout);
 
     return (
       <HashRouter>

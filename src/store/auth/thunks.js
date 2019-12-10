@@ -1,5 +1,5 @@
 import authService from 'services/AuthService';
-import { initLayout } from 'state/layout/actions';
+import { initLayout } from 'store/layout/actions';
 import {
   startLoginUser,
   stopLoginUser,
@@ -18,7 +18,7 @@ export const signInUser = (history, { username }) => {
       localStorage.setItem('authToken', data.token);
       dispatch(loginUserSuccess(data));
 
-      history.push('/');
+      history.push('/books');
     } catch (error) {
       dispatch(loginUserFailed(error));
     } finally {

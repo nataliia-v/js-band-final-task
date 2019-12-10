@@ -1,15 +1,11 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Books from 'pages/PrivateRoutes/Books/Books';
-import { connect } from 'react-redux';
-import { getIsAuthorizedUser } from '../../state/auth/selectors';
+import { getIsAuthorizedUser } from 'store/auth/selectors';
 
 const PrivateRoutes = () => {
-  // if (!isAuthorized) {
-  //   return <Redirect from="*" to="/signin" />
-  // }
-
   return (
     <div>
       <Route path="/books" component={Books} />

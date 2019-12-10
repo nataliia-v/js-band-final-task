@@ -6,17 +6,17 @@
 //   price: allOption.value,
 // };
 //
-// export default (state = initialState, action) => {
+// export default (store = initialState, action) => {
 //   const { payload } = action;
 //
 //   switch (action.type) {
 //     case SET_FILTER: {
 //       return {
-//         ...state,
+//         ...store,
 //         [payload.name]: payload.value
 //       };
 //     }
 //     default:
-//       return state;
+//       return store;
 //   }
 // };

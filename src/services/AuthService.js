@@ -1,8 +1,8 @@
 import BaseApiService from './BaseApiService';
 
 class AuthService extends BaseApiService {
-  async authUser({ username }) {
-    return this.post('/signin', { username });
+  async authUser(body) {
+    return this.post({ url: '/signin', body, isPrivate: false });
   }
 }
 

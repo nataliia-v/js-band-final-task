@@ -5,7 +5,6 @@ import SignIn from 'pages/PublicRoutes/SignIn/SignIn';
 import NotFound from 'pages/PublicRoutes/NotFound/NotFound';
 
 const PublicRoutes = () => {
-  console.log('public');
   return (
     <>
       <Route path="/signin" component={SignIn} exact />

@@ -3,7 +3,8 @@ import {
   STOP_LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
-  AUTH_SUCCESS
+  AUTH_SUCCESS,
+  AUTH_FAIL
 } from './types';
 
 const initialState = {
@@ -43,6 +44,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthorized: true
+      };
+    case AUTH_FAIL:
+      return {
+        ...state,
+        isAuthorized: false
       };
     default:
       return state;
