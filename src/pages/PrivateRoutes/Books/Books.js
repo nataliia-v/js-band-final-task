@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 
 import { getAllBooks, getBooksIsLoading } from 'store/books/selectors';
 import { fetchBooks } from 'store/books/thunks';
-
 import BookItem from './components/BookItem/BookItem';
+
+import styles from './Books.module.scss';
 
 class Books extends Component {
   componentDidMount() {
@@ -19,9 +20,11 @@ class Books extends Component {
 
     return (
       <div>
-        {books.map(book => (
-          <BookItem key={book.id} {...book} />
-        ))}
+        <div className={styles.booksList}>
+          {books.map(book => (
+            <BookItem key={book.id} {...book} />
+          ))}
+        </div>
       </div>
     );
   }

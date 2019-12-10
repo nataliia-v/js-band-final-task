@@ -7,8 +7,13 @@ function BookItem({ id, title, author, cover, price }) {
   const bookPath = `/books/${id}`;
 
   return (
-    <div className="card" style={{ width: `${15}rem` }}>
-      <img className="card-img-top" src={cover} alt="" />
+    <div className="card" style={{ width: `${11.5}rem` }}>
+      <img
+        className="card-img-top"
+        src={cover}
+        alt=""
+        style={{ height: `${13}rem` }}
+      />
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <p className="card-title">{author}</p>
