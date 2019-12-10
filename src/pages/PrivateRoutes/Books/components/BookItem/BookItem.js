@@ -11,8 +11,8 @@ function BookItem({ id, title, author, cover, price }) {
       <img
         className="card-img-top"
         src={cover}
-        alt=""
         style={{ height: `${13}rem` }}
+        alt="cart"
       />
       <div className="card-body">
         <h5 className="card-title">{title}</h5>

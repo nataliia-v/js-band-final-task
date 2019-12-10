@@ -15,7 +15,13 @@ export const signInUser = (history, { username }) => {
     try {
       const data = await authService.authUser({ username });
 
+      // const storageObject = {'authToken': data.token, 'username': data.username};
+      //
+      // localStorage.setItem('userData', JSON.stringify(storageObject));
+      // console.log(localStorage);
       localStorage.setItem('authToken', data.token);
+      localStorage.setItem('username', data.username);
+      localStorage.setItem('avatar', data.avatar);
       dispatch(loginUserSuccess(data));
 
       history.push('/books');

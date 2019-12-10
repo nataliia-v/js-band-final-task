@@ -9,7 +9,6 @@ const PrivateRoutes = () => {
   return (
     <div>
       <Route path="/books" component={Books} />
-
       <Redirect from="/" to="/books" exact />
     </div>
   );
