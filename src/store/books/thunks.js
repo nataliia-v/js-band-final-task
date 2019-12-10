@@ -22,3 +22,20 @@ export const fetchBooks = () => {
     }
   };
 };
+
+export const fetchBook = ({ id }) => {
+  return async dispatch => {
+    dispatch(startBooksFetching());
+
+    try {
+      const data = await booksService.getBook({ id });
+      console.log(data);
+
+      dispatch(fetchBooksSuccess(data));
+    } catch (error) {
+      dispatch(fetchBooksFailed(error));
+    } finally {
+      dispatch(stopBooksFetching());
+    }
+  };
+};
