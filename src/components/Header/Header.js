@@ -12,11 +12,10 @@ class Header extends Component {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
     localStorage.removeItem('avatar');
-    console.log(localStorage);
   };
 
   render() {
-    let { internName, isAuthorized } = this.props;
+    const { internName, isAuthorized } = this.props;
     const bookPath = `/signin`;
 
     const userName = localStorage.getItem('username');
