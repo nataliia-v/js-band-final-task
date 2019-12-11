@@ -12,7 +12,7 @@ export const getBooksIsLoading = createSelector(
   booksState => booksState.isLoading
 );
 
-export const getBooksError = createSelector(
+export const getBooksIsError = createSelector(
   getBooksModuleState,
-  booksState => booksState.error
+  booksState => booksState.isError
 );

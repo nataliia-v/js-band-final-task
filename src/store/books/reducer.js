@@ -10,7 +10,7 @@ const initialState = {
   data: [],
   currentBook: {},
   isLoading: true,
-  error: null
+  isError: null
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: null
+        isError: null
       };
     case STOP_BOOKS_FETCHING:
       return {
@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
     case FETCH_BOOKS_FAILED:
       return {
         ...state,
-        error: action.payload
+        isError: action.payload
       };
     default:
       return state;

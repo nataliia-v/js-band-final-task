@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { fetchBook } from 'store/books/thunks';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getBooksIsLoading, getAllBooks } from 'store/books/selectors';
+import {
+  getBooksIsLoading,
+  getAllBooks,
+  getBooksIsError
+} from 'store/books/selectors';
 import Spinner from 'components/Spinner/Spinner';
+import ErrorIndicator from 'components/ErrorIndicator/ErrorIndicator';
 import Counter from 'pages/PrivateRoutes/BookDetails/components/Counter/Counter';
 
 import styles from './BookDetails.module.scss';
@@ -28,10 +33,13 @@ class BookDetails extends Component {
   };
 
   render() {
-    const { books, isLoading } = this.props;
+    const { books, isLoading, isError } = this.props;
 
     if (isLoading) {
       return <Spinner />;
+    }
+    if (isError) {
+      return <ErrorIndicator />;
     }
 
     return (
@@ -39,7 +47,7 @@ class BookDetails extends Component {
         {books.map(book => (
           <div key={book.id}>
             <div className={styles.book}>
-              <img src={book.cover} alt="book" />
+              <img className={styles.img} src={book.cover} alt="book" />
               <div className={styles.bookInfo}>
                 <p>Book name: {book.title}</p>
                 <p>Author: {book.author}</p>
@@ -56,7 +64,8 @@ class BookDetails extends Component {
 }
 const mapStateToProps = state => ({
   books: getAllBooks(state),
-  isLoading: getBooksIsLoading(state)
+  isLoading: getBooksIsLoading(state),
+  isError: getBooksIsError(state)
 });
 
 const mapDispatchToProps = dispatch => ({
