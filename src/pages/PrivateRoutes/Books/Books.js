@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { getAllBooks, getBooksIsLoading } from 'store/books/selectors';
 import { fetchBooks } from 'store/books/thunks';
+import Spinner from 'components/Spinner/Spinner';
 import BookItem from './components/BookItem/BookItem';
 
 import styles from './Books.module.scss';
-import Spinner from 'components/Spinner/Spinner';
 
 class Books extends Component {
   componentDidMount() {

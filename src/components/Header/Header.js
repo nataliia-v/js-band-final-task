@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { getIsAuthorizedUser } from 'store/auth/selectors';
 import { ReactComponent as CartIcon } from 'images/cart2.svg';
 
-import styles from './Header.module.scss';
 import { logoutUser } from 'store/auth/actions';
+import styles from './Header.module.scss';
 
 class Header extends Component {
   signOut = event => {
