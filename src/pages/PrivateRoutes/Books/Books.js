@@ -7,6 +7,7 @@ import { fetchBooks } from 'store/books/thunks';
 import BookItem from './components/BookItem/BookItem';
 
 import styles from './Books.module.scss';
+import Spinner from 'components/Spinner/Spinner';
 
 class Books extends Component {
   componentDidMount() {
@@ -16,7 +17,11 @@ class Books extends Component {
   }
 
   render() {
-    const { books } = this.props;
+    const { books, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Spinner />;
+    }
 
     return (
       <div>

@@ -6,6 +6,10 @@ export const getAllBooks = createSelector(
   getBooksModuleState,
   booksState => booksState.data
 );
+export const getCurrentBook = createSelector(
+  getBooksModuleState,
+  booksState => booksState.book
+);
 
 export const getBooksIsLoading = createSelector(
   getBooksModuleState,
@@ -15,12 +19,4 @@ export const getBooksIsLoading = createSelector(
 export const getBooksError = createSelector(
   getBooksModuleState,
   booksState => booksState.error
-);
-
-export const getBookById = createSelector(
-  getAllBooks,
-  (_, bookId) => bookId,
-  (allBooks, bookId) => {
-    return allBooks.find(book => String(book.id) === String(bookId));
-  }
 );

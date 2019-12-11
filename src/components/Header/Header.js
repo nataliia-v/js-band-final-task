@@ -3,15 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getIsAuthorizedUser } from 'store/auth/selectors';
-import { ReactComponent as Cart } from 'images/cart2.svg';
+import { ReactComponent as CartIcon } from 'images/cart2.svg';
 
 import styles from './Header.module.scss';
+import { logoutUser } from 'store/auth/actions';
 
 class Header extends Component {
-  signOut = () => {
+  signOut = event => {
+    event.preventDefault();
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');
     localStorage.removeItem('avatar');
+
+    this.props.logoutUser();
   };
 
   render() {
@@ -26,7 +30,7 @@ class Header extends Component {
         <h1 className={styles.headerName}>JS BAND STORE/{internName}</h1>
         {isAuthorized && (
           <div className={styles.authorizedHeader}>
-            <Cart className={styles.cart} />
+            <CartIcon className={styles.cart} />
             <Link
               onClick={this.signOut}
               to={bookPath}
@@ -48,5 +52,8 @@ class Header extends Component {
 const mapStateToProps = state => ({
   isAuthorized: getIsAuthorizedUser(state)
 });
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser())
+});
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

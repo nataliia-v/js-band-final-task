@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { fetchBook } from 'store/books/thunks';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllBooks, getBooksIsLoading } from 'store/books/selectors';
+import { getCurrentBook, getBooksIsLoading } from 'store/books/selectors';
+import Spinner from 'components/Spinner/Spinner';
 
 import styles from './BookDetails.module.scss';
 
@@ -19,7 +20,11 @@ class BookDetails extends Component {
   };
 
   render() {
-    const { book } = this.props;
+    const { book, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Spinner />;
+    }
 
     return (
       <div>
@@ -53,7 +58,7 @@ class BookDetails extends Component {
   }
 }
 const mapStateToProps = state => ({
-  book: getAllBooks(state),
+  book: getCurrentBook(state),
   isLoading: getBooksIsLoading(state)
 });
 
