@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   data: [],
-  book: {},
+  currentBook: {},
   isLoading: true,
   error: null
 };
@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
     case START_BOOKS_FETCHING:
       return {
         ...state,
-        book: {},
         isLoading: true,
         error: null
       };
@@ -35,7 +34,7 @@ export default (state = initialState, action) => {
     case FETCH_BOOK_SUCCESS:
       return {
         ...state,
-        book: action.payload
+        data: [action.payload]
       };
     case FETCH_BOOKS_FAILED:
       return {

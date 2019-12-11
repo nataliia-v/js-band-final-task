@@ -6,10 +6,6 @@ export const getAllBooks = createSelector(
   getBooksModuleState,
   booksState => booksState.data
 );
-export const getCurrentBook = createSelector(
-  getBooksModuleState,
-  booksState => booksState.book
-);
 
 export const getBooksIsLoading = createSelector(
   getBooksModuleState,
