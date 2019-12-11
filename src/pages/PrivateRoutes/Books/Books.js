@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { getAllBooks, getBooksIsLoading } from 'store/books/selectors';
 import { fetchBooks } from 'store/books/thunks';
+import Spinner from 'components/Spinner/Spinner';
 import BookItem from './components/BookItem/BookItem';
 
 import styles from './Books.module.scss';
@@ -16,7 +17,11 @@ class Books extends Component {
   }
 
   render() {
-    const { books } = this.props;
+    const { books, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Spinner />;
+    }
 
     return (
       <div>

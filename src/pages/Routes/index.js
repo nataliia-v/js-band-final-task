@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { auth } from 'store/auth/thunks';
 import { getIsInitializedLayout } from 'store/layout/selectors';
-
 import SignIn from 'pages/PublicRoutes/SignIn/SignIn';
 import NotFound from 'pages/PublicRoutes/NotFound/NotFound';
 import Books from 'pages/PrivateRoutes/Books/Books';
@@ -24,7 +23,7 @@ class Routes extends Component {
     const { isInitializedLayout } = this.props;
 
     return (
-      <HashRouter>
+      <>
         {isInitializedLayout && (
           <Switch>
             <Route
@@ -47,7 +46,7 @@ class Routes extends Component {
             </Route>
           </Switch>
         )}
-      </HashRouter>
+      </>
     );
   }
 }

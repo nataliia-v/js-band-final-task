@@ -16,11 +16,3 @@ export const getBooksError = createSelector(
   getBooksModuleState,
   booksState => booksState.error
 );
-
-export const getBookById = createSelector(
-  getAllBooks,
-  (_, bookId) => bookId,
-  (allBooks, bookId) => {
-    return allBooks.find(book => String(book.id) === String(bookId));
-  }
-);
