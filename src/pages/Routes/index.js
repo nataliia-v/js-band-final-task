@@ -9,6 +9,7 @@ import SignIn from 'pages/PublicRoutes/SignIn/SignIn';
 import NotFound from 'pages/PublicRoutes/NotFound/NotFound';
 import Books from 'pages/PrivateRoutes/Books/Books';
 import BookDetails from 'pages/PrivateRoutes/BookDetails/BookDetails';
+import Cart from 'pages/PrivateRoutes/Cart/Cart';
 
 import withAuth from 'HOCs/withAuth';
 
@@ -38,6 +39,7 @@ class Routes extends Component {
               component={withAuth({})(BookDetails)}
               exact
             />
+            <Route path="/cart" component={withAuth({})(Cart)} exact />
 
             <Redirect from="/" to="/books" exact />
 

@@ -3,12 +3,12 @@ import {
   STOP_BOOKS_FETCHING,
   FETCH_BOOKS_SUCCESS,
   FETCH_BOOKS_FAILED,
-  FETCH_BOOK_SUCCESS
+  FETCH_BOOK_SUCCESS,
+  UPDATE_BOOK_COUNT
 } from './types';
 
 const initialState = {
   data: [],
-  currentBook: {},
   isLoading: true,
   isError: null
 };
@@ -40,6 +40,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isError: action.payload
+      };
+    case UPDATE_BOOK_COUNT:
+      return {
+        ...state,
+        data: state.data.map(book =>
+          book.id === action.payload.id
+            ? {
+                ...book,
+                ...(book.count -= action.payload.currentCount)
+              }
+            : book
+        )
       };
     default:
       return state;

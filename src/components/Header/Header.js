@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { getIsAuthorizedUser } from 'store/auth/selectors';
 import { ReactComponent as CartIcon } from 'images/cart2.svg';
-
+import Cart from 'pages/PrivateRoutes/Cart/Cart';
 import { logoutUser } from 'store/auth/actions';
+
 import styles from './Header.module.scss';
 
 class Header extends Component {
@@ -20,7 +21,6 @@ class Header extends Component {
 
   render() {
     const { internName, isAuthorized } = this.props;
-    const bookPath = `/signin`;
 
     const userName = localStorage.getItem('username');
     const avatar = localStorage.getItem('avatar');
@@ -30,10 +30,13 @@ class Header extends Component {
         <h1 className={styles.headerName}>JS BAND STORE/{internName}</h1>
         {isAuthorized && (
           <div className={styles.authorizedHeader}>
-            <CartIcon className={styles.cart} />
+            <Link to="/cart">
+              <CartIcon className={styles.cart} />
+            </Link>
+
             <Link
               onClick={this.signOut}
-              to={bookPath}
+              to="/signin"
               className="btn btn-primary"
             >
               Sign Out

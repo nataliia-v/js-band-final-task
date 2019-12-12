@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { fetchBook } from 'store/books/thunks';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { fetchBook } from 'store/books/thunks';
+import { addBookToCart, updateBookCountInCart } from 'store/cart/actions';
+import { updateBookCount } from 'store/books/actions';
 import {
   getBooksIsLoading,
   getAllBooks,
@@ -27,9 +30,10 @@ class BookDetails extends Component {
 
   onSubmit = payload => {
     console.log(payload);
-    // const { actions } = this.props;
-    //
-    // actions.addBookInCart(payload);
+    const { actions } = this.props;
+    actions.addBookToCart(payload);
+    actions.updateBookCount(payload);
+    actions.updateBookCountInCart(payload);
   };
 
   render() {
@@ -69,7 +73,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchBook }, dispatch)
+  actions: bindActionCreators(
+    { fetchBook, addBookToCart, updateBookCount, updateBookCountInCart },
+    dispatch
+  )
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);

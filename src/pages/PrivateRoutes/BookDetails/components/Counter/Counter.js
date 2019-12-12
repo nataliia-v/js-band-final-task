@@ -14,21 +14,29 @@ class Counter extends Component {
       title,
       price,
       count,
-      totalPrice: Math.floor(count * price * 100) / 100
+      currentCount: 0,
+      totalPrice: 0
     };
   }
 
   increment = () => {
     this.setState(state => {
       return {
-        count: state.count + 1
+        currentCount: state.currentCount + 1
       };
     });
+    if (this.state.currentCount === this.state.count) {
+      this.setState(state => {
+        return {
+          currentCount: state.count
+        };
+      });
+    }
     this.setState(state => {
       return {
-        totalPrice: (Math.floor(state.count * state.price * 100) / 100).toFixed(
-          2
-        )
+        totalPrice: (
+          Math.floor(state.currentCount * state.price * 100) / 100
+        ).toFixed(2)
       };
     });
   };
@@ -36,16 +44,22 @@ class Counter extends Component {
   decrement = () => {
     this.setState(state => {
       return {
-        count: state.count - 1
-        // totalPrice: count * state.price
+        currentCount: state.currentCount - 1
       };
     });
+    if (this.state.currentCount === 0) {
+      this.setState(state => {
+        return {
+          currentCount: 0
+        };
+      });
+    }
+
     this.setState(state => {
       return {
-        // count: state.count - 1,
-        totalPrice: (Math.floor(state.count * state.price * 100) / 100).toFixed(
-          2
-        )
+        totalPrice: (
+          Math.floor(state.currentCount * state.price * 100) / 100
+        ).toFixed(2)
       };
     });
   };
@@ -53,16 +67,24 @@ class Counter extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    if (this.state.currentCount === 0) {
+      return null;
+    }
     const { onSubmit } = this.props;
     onSubmit(this.state);
+    this.setState(state => {
+      return {
+        count: this.props.count - state.currentCount,
+        currentCount: 0,
+        totalPrice: 0
+      };
+    });
   };
 
   render() {
-    // console.log(this.state);
-
-    const { price, count, totalPrice } = this.state;
+    const { price, currentCount, totalPrice } = this.state;
     return (
-      <form onSubmit={this.handleSubmit} className={styles.addToCart}>
+      <form className={styles.addToCart}>
         <div className={styles.addToCartRow}>
           <span>Price, $</span>
           <span>{price}</span>
@@ -70,14 +92,20 @@ class Counter extends Component {
         <div className={styles.addToCartRow}>
           <span>Count</span>
           <div className={styles.flexCount}>
-            <p className={styles.count}>{count}</p>
+            <p className={styles.count}>{currentCount}</p>
             <div className={styles.flexArrows}>
-              <span onClick={this.increment} className={styles.arrowContainer}>
+              <button
+                onClick={this.increment}
+                className={styles.arrowContainer}
+              >
                 <ArrowTop className={styles.arrow} />
-              </span>
-              <span onClick={this.decrement} className={styles.arrowContainer}>
+              </button>
+              <button
+                onClick={this.decrement}
+                className={styles.arrowContainer}
+              >
                 <ArrowBottom className={styles.arrow} />
-              </span>
+              </button>
             </div>
           </div>
         </div>
@@ -85,7 +113,9 @@ class Counter extends Component {
           <span>Total price</span>
           <span>{totalPrice}</span>
         </div>
-        <button type="submit">Add to cart</button>
+        <button type="button" onClick={this.handleSubmit}>
+          Add to cart
+        </button>
       </form>
     );
   }
