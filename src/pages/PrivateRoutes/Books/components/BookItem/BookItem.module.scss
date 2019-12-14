@@ -1,19 +1,25 @@
 .wrapper {
+  width: 250px;
+  margin-bottom: 20px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.title {
+  font-weight: bold;
+}
+
+.cardBody {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.bookImg {
-  width: 150px;
-  height: 200px;
-}
-.row {
-  background-color: black;
-}
-.cardBody {
-  height: 100%;
-  background-color: #040ebe4f;
-  color: #f3f3f3;
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
