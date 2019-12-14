@@ -1,0 +1,14 @@
+@import 'styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10%;
+  color: $headerTextColor;
+}
+
+.title {
+  font-size: 100px;
+  margin-bottom: 20px;
+}
