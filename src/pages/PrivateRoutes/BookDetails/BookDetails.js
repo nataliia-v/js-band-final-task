@@ -47,13 +47,13 @@ class BookDetails extends Component {
     }
 
     return (
-      <div>
+      <div className={styles.bookWrap}>
         {books.map(book => (
           <div key={book.id}>
             <div className={styles.book}>
               <img className={styles.img} src={book.cover} alt="book" />
               <div className={styles.bookInfo}>
-                <p>Book name: {book.title}</p>
+                <h5>Book name: {book.title}</h5>
                 <p>Author: {book.author}</p>
                 <p>Level: {book.level}</p>
               </div>

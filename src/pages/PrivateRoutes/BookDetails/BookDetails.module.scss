@@ -1,7 +1,15 @@
+.bookWrap {
+  max-width: 1000px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  padding: 20px;
+  background-color: #a7a7a714;
+}
+
 .book {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 .img {

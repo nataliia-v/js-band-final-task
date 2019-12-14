@@ -48,10 +48,8 @@ class Counter extends Component {
       };
     });
     if (this.state.currentCount === 0) {
-      this.setState(state => {
-        return {
-          currentCount: 0
-        };
+      this.setState({
+        currentCount: 0
       });
     }
 
@@ -72,6 +70,7 @@ class Counter extends Component {
     }
     const { onSubmit } = this.props;
     onSubmit(this.state);
+
     this.setState(state => {
       return {
         count: this.props.count - state.currentCount,
@@ -86,21 +85,23 @@ class Counter extends Component {
     return (
       <form className={styles.addToCart}>
         <div className={styles.addToCartRow}>
-          <span>Price, $</span>
-          <span>{price}</span>
+          <span className={styles.boldText}>Price, $</span>
+          <span className={styles.boldText}>{price}</span>
         </div>
         <div className={styles.addToCartRow}>
-          <span>Count</span>
+          <span className={styles.boldText}>Count</span>
           <div className={styles.flexCount}>
             <p className={styles.count}>{currentCount}</p>
             <div className={styles.flexArrows}>
               <button
+                type="button"
                 onClick={this.increment}
                 className={styles.arrowContainer}
               >
                 <ArrowTop className={styles.arrow} />
               </button>
               <button
+                type="button"
                 onClick={this.decrement}
                 className={styles.arrowContainer}
               >
@@ -110,10 +111,14 @@ class Counter extends Component {
           </div>
         </div>
         <div className={styles.addToCartRow}>
-          <span>Total price</span>
-          <span>{totalPrice}</span>
+          <span className={styles.boldText}>Total price</span>
+          <span className={styles.boldText}>{totalPrice}</span>
         </div>
-        <button type="button" onClick={this.handleSubmit}>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={this.handleSubmit}
+        >
           Add to cart
         </button>
       </form>

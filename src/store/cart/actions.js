@@ -1,4 +1,8 @@
-import { ADD_BOOK_TO_CART, UPDATE_BOOK_COUNT_IN_CART } from './types';
+import {
+  ADD_BOOK_TO_CART,
+  UPDATE_BOOK_COUNT_IN_CART,
+  CALCULATE_TOTAL_PRICE
+} from './types';
 
 export const addBookToCart = payload => ({
   type: ADD_BOOK_TO_CART,
@@ -8,4 +12,8 @@ export const addBookToCart = payload => ({
 export const updateBookCountInCart = payload => ({
   type: UPDATE_BOOK_COUNT_IN_CART,
   payload
+});
+
+export const calculateTotalPrice = () => ({
+  type: CALCULATE_TOTAL_PRICE
 });

@@ -1,7 +1,9 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import './styles/variables.scss';
 
-* {
+*{
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 

@@ -4,8 +4,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
   AUTH_SUCCESS,
-  AUTH_FAIL,
-  LOGOUT_USER
+  LOGOUT_USER_SUCCESS
 } from './types';
 
 export const startLoginUser = () => ({
@@ -22,12 +21,10 @@ export const loginUserFailed = error => ({
   type: LOGIN_USER_FAILED,
   payload: error
 });
-export const authSuccess = () => ({
-  type: AUTH_SUCCESS
+export const authSuccess = userData => ({
+  type: AUTH_SUCCESS,
+  payload: userData
 });
-export const authFail = () => ({
-  type: AUTH_FAIL
-});
-export const logoutUser = () => ({
-  type: LOGOUT_USER
+export const logoutSuccess = () => ({
+  type: LOGOUT_USER_SUCCESS
 });

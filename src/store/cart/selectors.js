@@ -6,3 +6,8 @@ export const getBooks = createSelector(
   getCartModuleState,
   cartState => cartState.data
 );
+
+export const getTotalPrice = createSelector(
+  getCartModuleState,
+  cartState => cartState.totalPrice
+);

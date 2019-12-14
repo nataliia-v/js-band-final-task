@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
-import { getIsAuthorizedUser } from 'store/auth/selectors';
+import { getIsAuthorizedUser, getUserData } from 'store/auth/selectors';
 import { ReactComponent as CartIcon } from 'images/cart2.svg';
-import Cart from 'pages/PrivateRoutes/Cart/Cart';
-import { logoutUser } from 'store/auth/actions';
+
+import { logout } from 'store/auth/thunks';
 
 import styles from './Header.module.scss';
 
 class Header extends Component {
   signOut = event => {
     event.preventDefault();
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
-    localStorage.removeItem('avatar');
 
-    this.props.logoutUser();
+    this.props.actions.logout();
   };
 
   render() {
-    const { internName, isAuthorized } = this.props;
-
-    const userName = localStorage.getItem('username');
-    const avatar = localStorage.getItem('avatar');
+    const { internName, isAuthorized, userData } = this.props;
 
     return (
       <div className={styles.header}>
@@ -34,16 +29,19 @@ class Header extends Component {
               <CartIcon className={styles.cart} />
             </Link>
 
-            <Link
-              onClick={this.signOut}
-              to="/signin"
-              className="btn btn-primary"
-            >
-              Sign Out
-            </Link>
+            <div>
+              <button onClick={this.signOut} className="btn btn-primary">
+                Sign Out
+              </button>
+            </div>
+
             <div className={styles.userDataWrap}>
-              <img className={styles.avatar} src={avatar} alt="user avatar" />
-              <p className={styles.username}>{userName}</p>
+              <img
+                className={styles.avatar}
+                src={userData.avatar}
+                alt="user avatar"
+              />
+              <p className={styles.username}>{userData.username}</p>
             </div>
           </div>
         )}
@@ -53,10 +51,12 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthorized: getIsAuthorizedUser(state)
+  isAuthorized: getIsAuthorizedUser(state),
+  userData: getUserData(state)
 });
+
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  actions: bindActionCreators({ logout }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

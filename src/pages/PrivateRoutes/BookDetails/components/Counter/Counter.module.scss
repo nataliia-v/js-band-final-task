@@ -1,9 +1,3 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 .count{
   margin-bottom: 28%;
   margin-right: 5px;
@@ -12,6 +6,10 @@
 .flexCount {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 50px;
 }
 
 .flexArrows {
@@ -20,16 +18,17 @@
 }
 
 .arrowContainer {
-  width: 10px;
+  width: 15px;
 
   .arrow {
     width: 10px;
     height: 10px;
+
   }
 }
 
 .addToCart {
-  padding: 10px 5px;
+  padding: 10px 20px;
   width: 200px;
   border: 1px black dashed;
   height: 100%;
@@ -38,6 +37,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 10px;
+
+  }
+  .btnToCart {
+    padding: 5px 10px;
+    border-radius: 5px;
   }
 
+}
+
+.boldText {
+  font-weight: bold;
+  margin-bottom: 10px;
 }

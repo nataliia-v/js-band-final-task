@@ -1,12 +1,17 @@
 import authService from 'services/AuthService';
+import LocalStorageService from 'services/LocalStorageService';
+
 import { initLayout } from 'store/layout/actions';
 import {
   startLoginUser,
   stopLoginUser,
   loginUserFailed,
   loginUserSuccess,
-  authSuccess
+  authSuccess,
+  logoutSuccess
 } from './actions';
+
+const localStorageService = new LocalStorageService();
 
 export const signInUser = (history, { username }) => {
   return async dispatch => {
@@ -15,9 +20,9 @@ export const signInUser = (history, { username }) => {
     try {
       const data = await authService.authUser({ username });
 
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('username', data.username);
-      localStorage.setItem('avatar', data.avatar);
+      localStorageService.setItem('authToken', data.token);
+      localStorageService.setItem('username', data.username);
+      localStorageService.setItem('avatar', data.avatar);
       dispatch(loginUserSuccess(data));
 
       history.push('/books');
@@ -31,12 +36,23 @@ export const signInUser = (history, { username }) => {
 
 export const auth = () => {
   return dispatch => {
-    const authToken = localStorage.getItem('authToken');
+    const authToken = localStorageService.getItem('authToken');
 
     if (authToken) {
-      dispatch(authSuccess());
+      const avatar = localStorageService.getItem('avatar');
+      const username = localStorageService.getItem('username');
+
+      dispatch(authSuccess({ avatar, username }));
     }
 
     dispatch(initLayout());
+  };
+};
+
+export const logout = () => {
+  return dispatch => {
+    authService.clearAuthData();
+
+    dispatch(logoutSuccess());
   };
 };

@@ -1,3 +1,7 @@
+import LocalStorageService from './LocalStorageService';
+
+const localStorageService = new LocalStorageService();
+
 class BaseApiService {
   _apiBase = 'https://js-band-api.glitch.me';
 
@@ -7,7 +11,7 @@ class BaseApiService {
     };
 
     if (isPrivate) {
-      const authToken = localStorage.getItem('authToken');
+      const authToken = localStorageService.getItem('authToken');
       headers.Authorization = `Bearer ${authToken}`;
     }
 
