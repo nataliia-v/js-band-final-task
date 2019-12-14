@@ -7,34 +7,23 @@ import styles from './BookItem.module.scss';
 function BookItem({ id, title, author, cover, price }) {
   const bookPath = `/books/${id}`;
 
-  return (
-    <div className="card mb-3" style={{ width: `${470}px` }}>
-      <div
-        // className="row no-gutters"
-        className={classNames(styles.row, 'row no-gutters')}
-      >
-        <div>
-          <img
-            className={classNames(styles.bookImg, 'fa fa-check-square-o')}
-            src={cover}
-            alt="cart"
-          />
-        </div>
+  const wrapperClass = classNames(styles.wrapper, 'card');
+  const cardBodyClass = classNames(styles.cardBody, 'card-body');
+  const titleClass = classNames(styles.title, 'card-title');
 
-        <div className="col-md-8">
-          <div
-            // className="card-body"
-            className={classNames(styles.cardBody, 'card-body')}
-          >
-            <h5 className="card-title">{title}</h5>
-            <p className="card-title">{author}</p>
-            <div className={styles.wrapper}>
-              <span className="card-title">{price}</span>
-              <Link to={bookPath} className="btn btn-primary">
-                View
-              </Link>
-            </div>
-          </div>
+  return (
+    <div className={wrapperClass}>
+      <img src={cover} className="card-img-top" alt="..." />
+      <div className={cardBodyClass}>
+        <div>
+          <h5 className={titleClass}>{title}</h5>
+          <span className="card-text">{author}</span>
+        </div>
+        <div className={styles.cardFooter}>
+          <span className="card-text">{price}$</span>
+          <Link to={bookPath} className="btn btn-primary">
+            View
+          </Link>
         </div>
       </div>
     </div>

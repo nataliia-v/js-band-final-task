@@ -1,9 +1,12 @@
 import React from 'react';
+import classNames from 'classnames';
 
-function Select({ name, value, onChange, options }) {
+function Select({ name, value, onChange, options, classes = {} }) {
+  const wrapperClass = classNames(classes.root, 'form-control');
+
   return (
     <select
-      className="form-control"
+      className={wrapperClass}
       name={name}
       value={value}
       onChange={onChange}
