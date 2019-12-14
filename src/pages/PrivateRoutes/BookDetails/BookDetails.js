@@ -1,66 +1,102 @@
 import React, { Component } from 'react';
-import { fetchBook } from 'store/books/thunks';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getBooksIsLoading, getAllBooks } from 'store/books/selectors';
+
+import { fetchBook } from 'store/books/thunks';
+import { addBookToCart } from 'store/cart/actions';
+import { getBooksIsLoading, getBookById } from 'store/books/selectors';
+import { addToastThunk } from 'store/layout/thunks';
+import { getCartBookById } from 'store/cart/selectors';
 import Spinner from 'components/Spinner/Spinner';
-import Counter from 'pages/PrivateRoutes/BookDetails/components/Counter/Counter';
+
+import AddToCartForm from './components/AddToCartForm/AddToCartForm';
 
 import styles from './BookDetails.module.scss';
 
 class BookDetails extends Component {
   componentDidMount = () => {
+    this.fetchBook();
+  };
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.match.params.id !== this.props.match.params.id &&
+      this.props.match.params.id
+    ) {
+      this.fetchBook();
+    }
+  }
+
+  fetchBook = () => {
     const {
+      history,
       match: {
         params: { id }
-      }
-    } = this.props; // id
-    const { actions } = this.props;
+      },
+      actions
+    } = this.props;
 
-    actions.fetchBook({ id });
+    actions.fetchBook(history, { id });
   };
 
   onSubmit = payload => {
-    console.log(payload);
-    // const { actions } = this.props;
-    //
-    // actions.addBookInCart(payload);
+    const { actions, book } = this.props;
+    actions.addBookToCart({ ...payload, ...book });
+    actions.addToastThunk({
+      message: `${book.title} has been added to the cart.`
+    });
   };
 
   render() {
-    const { books, isLoading } = this.props;
+    const { book, cartBook, isLoading } = this.props;
 
     if (isLoading) {
       return <Spinner />;
     }
 
     return (
-      <div>
-        {books.map(book => (
+      <div className={styles.bookWrap}>
+        {book && (
           <div key={book.id}>
             <div className={styles.book}>
-              <img src={book.cover} alt="book" />
+              <img className={styles.img} src={book.cover} alt="book" />
               <div className={styles.bookInfo}>
-                <p>Book name: {book.title}</p>
+                <h5>Book name: {book.title}</h5>
                 <p>Author: {book.author}</p>
                 <p>Level: {book.level}</p>
               </div>
-              <Counter {...book} onSubmit={this.onSubmit} />
+              <AddToCartForm
+                {...book}
+                cartBook={cartBook}
+                classes={{ root: styles.cartForm }}
+                onSubmit={this.onSubmit}
+              />
             </div>
             <p>{book.description}</p>
           </div>
-        ))}
+        )}
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
-  books: getAllBooks(state),
+const mapStateToProps = (
+  state,
+  {
+    match: {
+      params: { id }
+    }
+  }
+) => ({
+  book: getBookById(state, id),
+  cartBook: getCartBookById(state, id),
   isLoading: getBooksIsLoading(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ fetchBook }, dispatch)
+  actions: bindActionCreators(
+    { fetchBook, addBookToCart, addToastThunk },
+    dispatch
+  )
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetails);

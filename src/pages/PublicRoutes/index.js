@@ -8,7 +8,7 @@ const PublicRoutes = () => {
   return (
     <>
       <Route path="/signin" component={SignIn} exact />
-      <Route path="*">
+      <Route path={['/404', '*']}>
         <NotFound />
       </Route>
     </>

@@ -4,8 +4,7 @@ import {
   startBooksFetching,
   stopBooksFetching,
   fetchBooksSuccess,
-  fetchBooksFailed,
-  fetchBookSuccess
+  fetchBooksFailed
 } from './actions';
 
 export const fetchBooks = () => {
@@ -22,14 +21,18 @@ export const fetchBooks = () => {
   };
 };
 
-export const fetchBook = ({ id }) => {
+export const fetchBook = (history, { id }) => {
   return async dispatch => {
     dispatch(startBooksFetching());
 
     try {
       const data = await booksService.getBook({ id });
-      dispatch(fetchBookSuccess(data));
+      dispatch(fetchBooksSuccess([data]));
     } catch (error) {
+      if (error.error.statusCode === 404) {
+        history.push('/404');
+      }
+
       dispatch(fetchBooksFailed(error));
     } finally {
       dispatch(stopBooksFetching());

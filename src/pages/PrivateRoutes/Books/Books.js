@@ -12,7 +12,6 @@ import styles from './Books.module.scss';
 class Books extends Component {
   componentDidMount() {
     const { actions } = this.props;
-
     actions.fetchBooks();
   }
 

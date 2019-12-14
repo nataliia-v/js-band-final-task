@@ -23,7 +23,8 @@
     "no-case-declarations": 0,
     "semi": "error",
     "radix": ["error", "as-needed"],
-    "react/destructuring-assignment": 0
+    "react/destructuring-assignment": 0,
+    "react/button-has-type": 0
   },
   "globals": {
     "window": true,

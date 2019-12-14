@@ -16,3 +16,8 @@ export const getAuthorizedError = createSelector(
   getUserModuleState,
   authState => authState.error
 );
+
+export const getUserData = createSelector(
+  getUserModuleState,
+  authState => authState.userData
+);

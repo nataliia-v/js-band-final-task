@@ -1,46 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
-import { getIsAuthorizedUser } from 'store/auth/selectors';
-import { ReactComponent as CartIcon } from 'images/cart2.svg';
+import Button from 'components/Button/Button';
+import { getIsAuthorizedUser, getUserData } from 'store/auth/selectors';
+import { getTotalCartItems } from 'store/cart/selectors';
+import { logout } from 'store/auth/thunks';
 
-import { logoutUser } from 'store/auth/actions';
+import CartLink from './component/CartLink/CartLink';
+
 import styles from './Header.module.scss';
 
 class Header extends Component {
   signOut = event => {
     event.preventDefault();
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
-    localStorage.removeItem('avatar');
 
-    this.props.logoutUser();
+    this.props.actions.logout();
   };
 
   render() {
-    const { internName, isAuthorized } = this.props;
-    const bookPath = `/signin`;
-
-    const userName = localStorage.getItem('username');
-    const avatar = localStorage.getItem('avatar');
+    const { internName, isAuthorized, userData, totalCartItems } = this.props;
 
     return (
       <div className={styles.header}>
-        <h1 className={styles.headerName}>JS BAND STORE/{internName}</h1>
+        <Link to="/" className={styles.headerName}>
+          <h1>JS BAND STORE/{internName}</h1>
+        </Link>
         {isAuthorized && (
           <div className={styles.authorizedHeader}>
-            <CartIcon className={styles.cart} />
-            <Link
-              onClick={this.signOut}
-              to={bookPath}
-              className="btn btn-primary"
-            >
-              Sign Out
-            </Link>
+            <CartLink totalCartItems={totalCartItems} />
+
+            <div>
+              <Button onClick={this.signOut} className="btn btn-primary">
+                Sign Out
+              </Button>
+            </div>
+
             <div className={styles.userDataWrap}>
-              <img className={styles.avatar} src={avatar} alt="user avatar" />
-              <p className={styles.username}>{userName}</p>
+              <img
+                className={styles.avatar}
+                src={userData.avatar}
+                alt="user avatar"
+              />
+              <p className={styles.username}>{userData.username}</p>
             </div>
           </div>
         )}
@@ -50,10 +53,13 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthorized: getIsAuthorizedUser(state)
+  isAuthorized: getIsAuthorizedUser(state),
+  userData: getUserData(state),
+  totalCartItems: getTotalCartItems(state)
 });
+
 const mapDispatchToProps = dispatch => ({
-  logoutUser: () => dispatch(logoutUser())
+  actions: bindActionCreators({ logout }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,7 +1,8 @@
-import { INIT_LAYOUT } from './types';
+import { INIT_LAYOUT, ADD_TOAST, REMOVE_TOAST } from './types';
 
 const initialState = {
-  isInitialised: false
+  isInitialised: false,
+  toasts: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +12,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         isInitialised: true
       };
+    case ADD_TOAST: {
+      return {
+        ...state,
+        toasts: [...state.toasts, action.payload]
+      };
+    }
+    case REMOVE_TOAST: {
+      return {
+        ...state,
+        toasts: state.toasts.filter(toast => toast.id !== action.payload.id)
+      };
+    }
     default:
       return state;
   }

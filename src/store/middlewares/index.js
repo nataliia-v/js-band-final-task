@@ -1,10 +1,12 @@
 import { get } from 'lodash';
-import { authFail } from 'store/auth/actions';
+
+import { logout } from 'store/auth/thunks';
 
 export const unauthorizedMiddleware = store => next => action => {
-  if (get(action, 'payload.error.statusCode') === 401) {
-    localStorage.removeItem('authToken');
-    store.dispatch(authFail());
+  const statusCode = get(action, 'payload.error.statusCode');
+
+  if (statusCode === 401) {
+    store.dispatch(logout());
   }
 
   next(action);

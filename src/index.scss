@@ -1,7 +1,15 @@
 @import "~bootstrap/scss/bootstrap.scss";
+@import "~reset-css";
 @import './styles/variables.scss';
 
+html, body, #root {
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 

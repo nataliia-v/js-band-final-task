@@ -7,12 +7,20 @@ export const getAllBooks = createSelector(
   booksState => booksState.data
 );
 
+export const getBookById = createSelector(
+  getAllBooks,
+  (_, bookId) => bookId,
+  (allBooks, bookId) => {
+    return allBooks.find(book => book.id === bookId);
+  }
+);
+
 export const getBooksIsLoading = createSelector(
   getBooksModuleState,
   booksState => booksState.isLoading
 );
 
-export const getBooksError = createSelector(
+export const getBooksIsError = createSelector(
   getBooksModuleState,
-  booksState => booksState.error
+  booksState => booksState.isError
 );
