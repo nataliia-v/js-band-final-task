@@ -8,6 +8,7 @@ class AuthService extends BaseApiService {
     return this.post({ url: '/signin', body, isPrivate: false });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   clearAuthData() {
     ['authToken', 'avatar', 'username'].forEach(field =>
       localStorageService.removeItem(field)

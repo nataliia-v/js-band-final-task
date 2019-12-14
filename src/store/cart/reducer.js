@@ -1,61 +1,48 @@
 import {
   ADD_BOOK_TO_CART,
-  UPDATE_BOOK_COUNT_IN_CART,
-  CALCULATE_TOTAL_PRICE
+  START_CART_PURCHASE,
+  STOP_CART_PURCHASE,
+  PURCHASE_SUCCESS
 } from './types';
 
 const initialState = {
   data: [],
-  totalPrice: 0
+  totalPrice: 0,
+  isLoading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case START_CART_PURCHASE: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case STOP_CART_PURCHASE: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case PURCHASE_SUCCESS: {
+      return {
+        ...state,
+        data: [],
+        totalPrice: 0
+      };
+    }
     case ADD_BOOK_TO_CART:
-      // return {
-      //   ...state,
-      //   data: [
-      //     action.payload,
-      //     ...state.data.filter(book => Number(book.id) !== Number(action.payload.id)) ]
-      // };
+      const data = [
+        ...state.data.filter(book => book.id !== action.payload.id),
+        action.payload
+      ];
+
       return {
         ...state,
-        data: [
-          action.payload,
-          ...state.data.filter(
-            book => Number(book.id) !== Number(action.payload.id)
-          )
-        ]
+        data,
+        totalPrice: data.reduce((acc, book) => acc + Number(book.totalPrice), 0)
       };
-
-    // return {
-    //   ...state,
-    //   data: [...state.data, action.payload],
-    // };
-
-    case CALCULATE_TOTAL_PRICE:
-      return {
-        ...state,
-        totalPrice: state.data.reduce(
-          (accumulator, currentValue) =>
-            Number(accumulator) + Number(currentValue.totalPrice),
-          0
-        )
-      };
-
-    case UPDATE_BOOK_COUNT_IN_CART:
-      return {
-        ...state,
-        data: state.data.map(book =>
-          book.id === action.payload.id
-            ? {
-                ...book,
-                ...(book.count -= action.payload.currentCount)
-              }
-            : book
-        )
-      };
-
     default:
       return state;
   }

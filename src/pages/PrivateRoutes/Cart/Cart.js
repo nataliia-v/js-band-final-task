@@ -2,46 +2,48 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getBooks, getTotalPrice } from 'store/cart/selectors';
-import { calculateTotalPrice } from 'store/cart/actions';
+import Button from 'components/Button/Button';
+import Table from 'components/Table/Table';
+import { cartPurchase } from 'store/cart/thunks';
+import { getCartBooks } from 'store/cart/selectors';
+
+import EmptyState from './EmptyState/EmptyState';
+import cartTableColumns from './cartTableColumns';
+
+import styles from './Cart.module.scss';
 
 class Cart extends Component {
-  componentDidMount() {
+  onPurchase = () => {
     const { actions } = this.props;
-    actions.calculateTotalPrice();
-  }
+    actions.cartPurchase();
+  };
 
   render() {
-    const { books, allTotalPrice } = this.props;
-    return (
-      <div>
-        <button type="button">Purchase</button>
-        <ul>
-          {books.map(book => (
-            <li className="list-group list-group-horizontal" key={book.id}>
-              <p className="list-group-item">{book.title}</p>
-              <p className="list-group-item">{book.currentCount}</p>
-              <p className="list-group-item">{book.totalPrice}</p>
-            </li>
-          ))}
-        </ul>
+    const { cartBooks } = this.props;
 
-        <div>
-          <span>Total price,</span>
-          <span> $ {allTotalPrice}</span>
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.btnWrapper}>
+          <Button disabled={!cartBooks.length} onClick={this.onPurchase}>
+            Purchase
+          </Button>
         </div>
+        {cartBooks.length ? (
+          <Table columns={cartTableColumns} data={cartBooks} />
+        ) : (
+          <EmptyState />
+        )}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ calculateTotalPrice }, dispatch)
+const mapStateToProps = state => ({
+  cartBooks: getCartBooks(state)
 });
 
-const mapStateToProps = state => ({
-  books: getBooks(state),
-  allTotalPrice: getTotalPrice(state)
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({ cartPurchase }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

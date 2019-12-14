@@ -2,8 +2,9 @@
 @import "~reset-css";
 @import './styles/variables.scss';
 
-body {
+html, body, #root {
   font-family: sans-serif;
+  min-height: 100vh;
 }
 
 * {

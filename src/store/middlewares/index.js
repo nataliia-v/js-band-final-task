@@ -3,7 +3,9 @@ import { get } from 'lodash';
 import { logout } from 'store/auth/thunks';
 
 export const unauthorizedMiddleware = store => next => action => {
-  if (get(action, 'payload.error.statusCode') === 401) {
+  const statusCode = get(action, 'payload.error.statusCode');
+
+  if (statusCode === 401) {
     store.dispatch(logout());
   }
 

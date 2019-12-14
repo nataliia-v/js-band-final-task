@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import FormField from 'components/Forms/FormField/FormField';
 import Input from 'components/Forms/Input/Input';
+import Button from 'components/Button/Button';
 
 import styles from './SignInForm.module.scss';
 
@@ -53,16 +54,12 @@ class SignInForm extends Component {
             />
           }
         />
-        <button
+        <Button
           type="submit"
           className={classNames(styles.btn, 'btn btn-outline-primary')}
         >
-          {isLoadingUserLogin ? (
-            <div className="spinner-border text-primary" />
-          ) : (
-            'Sign-In'
-          )}
-        </button>
+          {isLoadingUserLogin ? <div className="spinner-border" /> : 'Sign-In'}
+        </Button>
       </form>
     );
   }

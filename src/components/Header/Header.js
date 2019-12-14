@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
+import Button from 'components/Button/Button';
 import { getIsAuthorizedUser, getUserData } from 'store/auth/selectors';
-import { ReactComponent as CartIcon } from 'images/cart2.svg';
-
+import { getTotalCartItems } from 'store/cart/selectors';
 import { logout } from 'store/auth/thunks';
+
+import CartLink from './component/CartLink/CartLink';
 
 import styles from './Header.module.scss';
 
@@ -18,21 +20,21 @@ class Header extends Component {
   };
 
   render() {
-    const { internName, isAuthorized, userData } = this.props;
+    const { internName, isAuthorized, userData, totalCartItems } = this.props;
 
     return (
       <div className={styles.header}>
-        <h1 className={styles.headerName}>JS BAND STORE/{internName}</h1>
+        <Link to="/" className={styles.headerName}>
+          <h1>JS BAND STORE/{internName}</h1>
+        </Link>
         {isAuthorized && (
           <div className={styles.authorizedHeader}>
-            <Link to="/cart">
-              <CartIcon className={styles.cart} />
-            </Link>
+            <CartLink totalCartItems={totalCartItems} />
 
             <div>
-              <button onClick={this.signOut} className="btn btn-primary">
+              <Button onClick={this.signOut} className="btn btn-primary">
                 Sign Out
-              </button>
+              </Button>
             </div>
 
             <div className={styles.userDataWrap}>
@@ -52,7 +54,8 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
   isAuthorized: getIsAuthorizedUser(state),
-  userData: getUserData(state)
+  userData: getUserData(state),
+  totalCartItems: getTotalCartItems(state)
 });
 
 const mapDispatchToProps = dispatch => ({

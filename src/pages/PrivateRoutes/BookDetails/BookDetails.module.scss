@@ -9,9 +9,24 @@
 .book {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 20px;
+
+  & > * {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
 }
+
 .img {
   width: 300px;
+}
+
+.bookInfo {
+  max-width: 300px;
+}
+
+.cartForm {
+  flex: 1;
 }

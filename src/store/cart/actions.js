@@ -1,7 +1,9 @@
 import {
   ADD_BOOK_TO_CART,
-  UPDATE_BOOK_COUNT_IN_CART,
-  CALCULATE_TOTAL_PRICE
+  START_CART_PURCHASE,
+  STOP_CART_PURCHASE,
+  PURCHASE_SUCCESS,
+  PURCHASE_FAIL
 } from './types';
 
 export const addBookToCart = payload => ({
@@ -9,11 +11,19 @@ export const addBookToCart = payload => ({
   payload
 });
 
-export const updateBookCountInCart = payload => ({
-  type: UPDATE_BOOK_COUNT_IN_CART,
-  payload
+export const startCartPurchase = () => ({
+  type: START_CART_PURCHASE
 });
 
-export const calculateTotalPrice = () => ({
-  type: CALCULATE_TOTAL_PRICE
+export const stopCartPurchase = () => ({
+  type: STOP_CART_PURCHASE
+});
+
+export const purchaseSuccess = () => ({
+  type: PURCHASE_SUCCESS
+});
+
+export const purchaseFailed = error => ({
+  type: PURCHASE_FAIL,
+  payload: error
 });

@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.title {
+  padding-right: 20px;
+}
+
+.value {
+  padding-left: 20px;
+}

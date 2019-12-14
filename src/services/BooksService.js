@@ -8,6 +8,10 @@ class BooksService extends BaseApiService {
   async getBook({ id }) {
     return this.get({ url: `/books/${id}` });
   }
+
+  async purchaseBooks(body) {
+    return this.post({ url: '/purchase', body });
+  }
 }
 
 const booksService = new BooksService();

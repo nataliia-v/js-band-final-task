@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 function Input({
   type = 'text',
@@ -8,11 +9,16 @@ function Input({
   onChange,
   required = false,
   minLength = 0,
-  maxLength
+  maxLength,
+  min,
+  max,
+  classes = {}
 }) {
+  const inputClass = classNames(classes.input, 'form-control');
+
   return (
     <input
-      className="form-control"
+      className={inputClass}
       type={type}
       name={name}
       value={value}
@@ -21,6 +27,8 @@ function Input({
       required={required}
       minLength={minLength}
       maxLength={maxLength}
+      min={min}
+      max={max}
     />
   );
 }
