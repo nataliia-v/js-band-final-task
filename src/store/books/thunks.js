@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import booksService from 'services/BooksService';
 
 import {
@@ -29,7 +30,7 @@ export const fetchBook = (history, { id }) => {
       const data = await booksService.getBook({ id });
       dispatch(fetchBooksSuccess([data]));
     } catch (error) {
-      if (error.error.statusCode === 404) {
+      if (get(error.error, 'statusCode') === 404) {
         history.push('/404');
       }
 
