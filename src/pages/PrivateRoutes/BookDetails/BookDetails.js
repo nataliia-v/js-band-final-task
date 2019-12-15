@@ -19,10 +19,8 @@ class BookDetails extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.match.params.id !== this.props.match.params.id &&
-      this.props.match.params.id
-    ) {
+    const { match } = this.props;
+    if (prevProps.match.params.id !== match.params.id && match.params.id) {
       this.fetchBook();
     }
   }
@@ -61,9 +59,16 @@ class BookDetails extends Component {
             <div className={styles.book}>
               <img className={styles.img} src={book.cover} alt="book" />
               <div className={styles.bookInfo}>
-                <h5>Book name: {book.title}</h5>
-                <p>Author: {book.author}</p>
-                <p>Level: {book.level}</p>
+                <h5 className={styles.title}>Book name: {book.title}</h5>
+                <p className={styles.info}>Author: {book.author}</p>
+                <p className={styles.info}>Level: {book.level}</p>
+                <div className={styles.info}>
+                  <span>Tags: </span>
+                  {book.tags.map(tag => (
+                    // console.log(tag)
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
               </div>
               <AddToCartForm
                 {...book}
@@ -72,7 +77,7 @@ class BookDetails extends Component {
                 onSubmit={this.onSubmit}
               />
             </div>
-            <p>{book.description}</p>
+            <p>Description: {book.description}</p>
           </div>
         )}
       </div>

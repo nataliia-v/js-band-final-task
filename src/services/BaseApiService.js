@@ -3,7 +3,7 @@ import LocalStorageService from './LocalStorageService';
 const localStorageService = new LocalStorageService();
 
 class BaseApiService {
-  _apiBase = 'https://js-band-api.glitch.me';
+  apiBase = 'https://js-band-api.glitch.me';
 
   async makeRequest({ method, url, body = {}, isPrivate = true }) {
     const headers = {
@@ -25,7 +25,7 @@ class BaseApiService {
       delete fetchConfig.body;
     }
 
-    const response = await fetch(`${this._apiBase}${url}`, fetchConfig);
+    const response = await fetch(`${this.apiBase}${url}`, fetchConfig);
 
     if (!response.ok) {
       // eslint-disable-next-line no-throw-literal

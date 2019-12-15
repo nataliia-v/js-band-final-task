@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
 
 import FormField from 'components/Forms/FormField/FormField';
 import Input from 'components/Forms/Input/Input';
@@ -54,10 +53,7 @@ class SignInForm extends Component {
             />
           }
         />
-        <Button
-          type="submit"
-          className={classNames(styles.btn, 'btn btn-outline-primary')}
-        >
+        <Button type="submit" classes={{ root: styles.btn }}>
           {isLoadingUserLogin ? <div className="spinner-border" /> : 'Sign-In'}
         </Button>
       </form>
