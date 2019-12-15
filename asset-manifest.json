@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/js-band-final-task/static/css/main.83eaa135.chunk.css",
+    "main.js": "/js-band-final-task/static/js/main.432a2e13.chunk.js",
+    "main.js.map": "/js-band-final-task/static/js/main.432a2e13.chunk.js.map",
+    "runtime-main.js": "/js-band-final-task/static/js/runtime-main.3be8268d.js",
+    "runtime-main.js.map": "/js-band-final-task/static/js/runtime-main.3be8268d.js.map",
+    "static/js/2.7fa422c6.chunk.js": "/js-band-final-task/static/js/2.7fa422c6.chunk.js",
+    "static/js/2.7fa422c6.chunk.js.map": "/js-band-final-task/static/js/2.7fa422c6.chunk.js.map",
+    "index.html": "/js-band-final-task/index.html",
+    "precache-manifest.8504de172600cfea255a5628e62fe55d.js": "/js-band-final-task/precache-manifest.8504de172600cfea255a5628e62fe55d.js",
+    "service-worker.js": "/js-band-final-task/service-worker.js",
+    "static/css/main.83eaa135.chunk.css.map": "/js-band-final-task/static/css/main.83eaa135.chunk.css.map",
+    "static/media/cart2.3abf384f.svg": "/js-band-final-task/static/media/cart2.3abf384f.svg",
+    "static/media/user.8547ceae.svg": "/js-band-final-task/static/media/user.8547ceae.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3be8268d.js",
+    "static/js/2.7fa422c6.chunk.js",
+    "static/css/main.83eaa135.chunk.css",
+    "static/js/main.432a2e13.chunk.js"
+  ]
+}
