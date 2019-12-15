@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Gh-pages link:
 
+https://nataliia-v.github.io/js-band-final-task/#/signin
+
 ## Available Scripts
 
 In the project directory, you can run:

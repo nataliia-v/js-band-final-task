@@ -8,10 +8,6 @@ import Button from 'components/Button/Button';
 import styles from './AddToCartForm.module.scss';
 
 class AddToCartForm extends Component {
-  static defaultProps = {
-    classes: {}
-  };
-
   constructor(props) {
     super(props);
 

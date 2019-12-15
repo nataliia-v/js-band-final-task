@@ -16,7 +16,8 @@ class Header extends Component {
   signOut = event => {
     event.preventDefault();
 
-    this.props.actions.logout();
+    const { actions } = this.props;
+    actions.logout();
   };
 
   render() {
